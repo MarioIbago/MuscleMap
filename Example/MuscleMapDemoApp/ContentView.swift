@@ -7,52 +7,52 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             HighlightDemo()
-                .tabItem { Label("Highlight", systemImage: "figure.stand") }
+                .tabItem { Label("Resaltado", systemImage: "figure.stand") }
                 .tag(0)
 
             HeatmapDemo()
-                .tabItem { Label("Heatmap", systemImage: "flame") }
+                .tabItem { Label("Mapa de calor", systemImage: "flame") }
                 .tag(1)
 
             InteractiveDemo()
-                .tabItem { Label("Interactive", systemImage: "hand.tap") }
+                .tabItem { Label("Interactivo", systemImage: "hand.tap") }
                 .tag(2)
 
             StyleDemo()
-                .tabItem { Label("Styles", systemImage: "paintbrush") }
+                .tabItem { Label("Estilos", systemImage: "paintbrush") }
                 .tag(3)
 
             GradientDemo()
-                .tabItem { Label("Gradient", systemImage: "paintpalette") }
+                .tabItem { Label("Degradado", systemImage: "paintpalette") }
                 .tag(4)
 
             AnimationDemo()
-                .tabItem { Label("Animation", systemImage: "wand.and.stars") }
+                .tabItem { Label("Animación", systemImage: "wand.and.stars") }
                 .tag(5)
 
             InteractiveV2Demo()
-                .tabItem { Label("Interactive V2", systemImage: "hand.draw") }
+                .tabItem { Label("Interactivo V2", systemImage: "hand.draw") }
                 .tag(6)
 
             HeatmapV2Demo()
-                .tabItem { Label("Heatmap V2", systemImage: "chart.bar.fill") }
+                .tabItem { Label("Mapa V2", systemImage: "chart.bar.fill") }
                 .tag(7)
 
             SubGroupsDemo()
-                .tabItem { Label("Sub-Groups", systemImage: "rectangle.split.3x3") }
+                .tabItem { Label("Subgrupos", systemImage: "rectangle.split.3x3") }
                 .tag(8)
         }
     }
 }
 
-// MARK: - Highlight Demo
+// MARK: - Demostración de resaltado
 
 struct HighlightDemo: View {
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    Text("Male - Front & Back")
+                    Text("Masculino - Anterior y posterior")
                         .font(.headline)
 
                     HStack(spacing: 16) {
@@ -74,7 +74,7 @@ struct HighlightDemo: View {
                     }
                     .padding(.horizontal)
 
-                    Text("Female - Front & Back")
+                    Text("Femenino - Anterior y posterior")
                         .font(.headline)
 
                     HStack(spacing: 16) {
@@ -95,19 +95,19 @@ struct HighlightDemo: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("Highlight")
+            .navigationTitle("Resaltado")
         }
     }
 }
 
-// MARK: - Heatmap Demo
+// MARK: - Demostración de mapa de calor
 
 struct HeatmapDemo: View {
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    Text("Workout Intensity (0-4)")
+                    Text("Intensidad de entrenamiento (0-4)")
                         .font(.headline)
 
                     BodyView(gender: .male, side: .front)
@@ -124,7 +124,7 @@ struct HeatmapDemo: View {
                         .frame(height: 400)
                         .padding(.horizontal)
 
-                    Text("Thermal Scale")
+                    Text("Escala térmica")
                         .font(.headline)
 
                     BodyView(gender: .male, side: .back)
@@ -140,7 +140,7 @@ struct HeatmapDemo: View {
                         .frame(height: 400)
                         .padding(.horizontal)
 
-                    Text("Medical Scale")
+                    Text("Escala médica")
                         .font(.headline)
 
                     let data: [MuscleIntensity] = [
@@ -158,12 +158,12 @@ struct HeatmapDemo: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("Heatmap")
+            .navigationTitle("Mapa de calor")
         }
     }
 }
 
-// MARK: - Interactive Demo
+// MARK: - Demostración interactiva
 
 struct InteractiveDemo: View {
     @State private var selectedMuscle: Muscle?
@@ -175,15 +175,15 @@ struct InteractiveDemo: View {
         NavigationStack {
             VStack(spacing: 16) {
                 HStack {
-                    Picker("Gender", selection: $gender) {
-                        Text("Male").tag(BodyGender.male)
-                        Text("Female").tag(BodyGender.female)
+                    Picker("Sexo", selection: $gender) {
+                        Text("Masculino").tag(BodyGender.male)
+                        Text("Femenino").tag(BodyGender.female)
                     }
                     .pickerStyle(.segmented)
 
-                    Picker("Side", selection: $bodySide) {
-                        Text("Front").tag(BodySide.front)
-                        Text("Back").tag(BodySide.back)
+                    Picker("Vista", selection: $bodySide) {
+                        Text("Anterior").tag(BodySide.front)
+                        Text("Posterior").tag(BodySide.back)
                     }
                     .pickerStyle(.segmented)
                 }
@@ -192,13 +192,13 @@ struct InteractiveDemo: View {
                 if let muscle = selectedMuscle {
                     HStack {
                         Image(systemName: "figure.stand")
-                        Text("\(muscle.displayName) (\(selectedSide.rawValue))")
+                        Text("\(muscle.displayName) (\(selectedSide.displayName))")
                             .font(.title3.bold())
                     }
                     .padding(8)
                     .background(.green.opacity(0.15), in: RoundedRectangle(cornerRadius: 8))
                 } else {
-                    Text("Tap a muscle")
+                    Text("Toca una región muscular")
                         .foregroundStyle(.secondary)
                 }
 
@@ -213,26 +213,26 @@ struct InteractiveDemo: View {
                     .padding(.horizontal)
             }
             .padding(.vertical)
-            .navigationTitle("Interactive")
+            .navigationTitle("Interactivo")
         }
     }
 }
 
-// MARK: - Style Demo
+// MARK: - Demostración de estilos
 
 struct StyleDemo: View {
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    styleCard("Default", style: .default)
-                    styleCard("Minimal", style: .minimal)
-                    styleCard("Neon", style: .neon, background: .black)
-                    styleCard("Medical", style: .medical)
+                    styleCard("Predeterminado", style: .default)
+                    styleCard("Minimalista", style: .minimal)
+                    styleCard("Neón", style: .neon, background: .black)
+                    styleCard("Médico", style: .medical)
                 }
                 .padding()
             }
-            .navigationTitle("Styles")
+            .navigationTitle("Estilos")
         }
     }
 
@@ -254,14 +254,14 @@ struct StyleDemo: View {
     }
 }
 
-// MARK: - Gradient Demo
+// MARK: - Demostración de degradados
 
 struct GradientDemo: View {
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    Text("Linear Gradient")
+                    Text("Degradado lineal")
                         .font(.headline)
 
                     BodyView(gender: .male, side: .front)
@@ -272,7 +272,7 @@ struct GradientDemo: View {
                         .frame(height: 400)
                         .padding(.horizontal)
 
-                    Text("Radial Gradient")
+                    Text("Degradado radial")
                         .font(.headline)
 
                     BodyView(gender: .male, side: .front)
@@ -282,7 +282,7 @@ struct GradientDemo: View {
                         .frame(height: 400)
                         .padding(.horizontal)
 
-                    Text("Mixed Fills")
+                    Text("Rellenos combinados")
                         .font(.headline)
 
                     BodyView(gender: .female, side: .front)
@@ -294,12 +294,12 @@ struct GradientDemo: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("Gradient")
+            .navigationTitle("Degradado")
         }
     }
 }
 
-// MARK: - Animation Demo
+// MARK: - Demostración de animaciones
 
 struct AnimationDemo: View {
     @State private var showUpperBody = true
@@ -309,10 +309,10 @@ struct AnimationDemo: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    Text("Animated Transitions")
+                    Text("Transiciones animadas")
                         .font(.headline)
 
-                    Button(showUpperBody ? "Show Lower Body" : "Show Upper Body") {
+                    Button(showUpperBody ? "Mostrar tren inferior" : "Mostrar tren superior") {
                         showUpperBody.toggle()
                     }
                     .buttonStyle(.borderedProminent)
@@ -321,10 +321,10 @@ struct AnimationDemo: View {
                         .frame(height: 400)
                         .padding(.horizontal)
 
-                    Text("Pulse Animation")
+                    Text("Animación de pulso")
                         .font(.headline)
 
-                    Text("Tap a muscle to see pulse effect")
+                    Text("Toca una región muscular para ver el efecto de pulso")
                         .font(.caption)
                         .foregroundStyle(.secondary)
 
@@ -340,7 +340,7 @@ struct AnimationDemo: View {
                         .frame(height: 400)
                         .padding(.horizontal)
 
-                    Text("Shadow + Neon Style")
+                    Text("Sombra + estilo neón")
                         .font(.headline)
 
                     BodyView(gender: .male, side: .front)
@@ -355,7 +355,7 @@ struct AnimationDemo: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("Animation")
+            .navigationTitle("Animación")
         }
     }
 
@@ -378,7 +378,7 @@ struct AnimationDemo: View {
     }
 }
 
-// MARK: - Interactive V2 Demo
+// MARK: - Demostración interactiva V2
 
 struct InteractiveV2Demo: View {
     @State private var selectedMuscles: Set<Muscle> = []
@@ -389,10 +389,10 @@ struct InteractiveV2Demo: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 12) {
-                // Status bar
+                // Barra de estado
                 HStack {
                     if selectedMuscles.isEmpty {
-                        Text("Tap to select, long press for info, drag to paint")
+                        Text("Toca para seleccionar, mantén presionado para información y arrastra para pintar")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
@@ -401,14 +401,14 @@ struct InteractiveV2Demo: View {
                             .lineLimit(2)
                     }
                     Spacer()
-                    Button("Undo") {
+                    Button("Deshacer") {
                         if let state = history.undo() {
                             selectedMuscles = state
                         }
                     }
                     .disabled(!history.canUndo)
 
-                    Button("Redo") {
+                    Button("Rehacer") {
                         if let state = history.redo() {
                             selectedMuscles = state
                         }
@@ -425,7 +425,7 @@ struct InteractiveV2Demo: View {
                         .transition(.opacity)
                 }
 
-                // Body view with all interactive features
+                // Vista corporal con todas las funciones interactivas
                 BodyView(gender: .male, side: .front)
                     .highlight(Array(selectedMuscles), color: .orange)
                     .selected(selectedMuscles)
@@ -443,7 +443,7 @@ struct InteractiveV2Demo: View {
                     }
                     .onMuscleLongPressed(duration: 0.5) { muscle, side in
                         withAnimation {
-                            longPressedMuscle = "Long pressed: \(muscle.displayName) (\(side.rawValue))"
+                            longPressedMuscle = "Pulsación prolongada: \(muscle.displayName) (\(side.displayName))"
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation { longPressedMuscle = "" }
@@ -466,7 +466,7 @@ struct InteractiveV2Demo: View {
                     .frame(maxHeight: .infinity)
                     .padding(.horizontal)
 
-                Button("Clear Selection") {
+                Button("Limpiar selección") {
                     selectedMuscles.removeAll()
                     history.push(selectedMuscles)
                 }
@@ -474,12 +474,12 @@ struct InteractiveV2Demo: View {
                 .disabled(selectedMuscles.isEmpty)
             }
             .padding(.vertical)
-            .navigationTitle("Interactive V2")
+            .navigationTitle("Interactivo V2")
         }
     }
 }
 
-// MARK: - Heatmap V2 Demo
+// MARK: - Demostración de mapa de calor V2
 
 struct HeatmapV2Demo: View {
     @State private var threshold: Double = 0.0
@@ -488,11 +488,11 @@ struct HeatmapV2Demo: View {
     @State private var interpolation: InterpolationChoice = .linear
 
     enum InterpolationChoice: String, CaseIterable {
-        case linear = "Linear"
-        case easeIn = "Ease In"
-        case easeOut = "Ease Out"
-        case easeInOut = "Ease In-Out"
-        case stepped = "Stepped"
+        case linear = "Lineal"
+        case easeIn = "Entrada suave"
+        case easeOut = "Salida suave"
+        case easeInOut = "Entrada y salida"
+        case stepped = "Por niveles"
 
         var value: ColorInterpolation {
             switch self {
@@ -533,10 +533,10 @@ struct HeatmapV2Demo: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    // Controls
-                    GroupBox("Settings") {
+                    // Controles
+                    GroupBox("Configuración") {
                         VStack(spacing: 12) {
-                            Picker("Interpolation", selection: $interpolation) {
+                            Picker("Interpolación", selection: $interpolation) {
                                 ForEach(InterpolationChoice.allCases, id: \.self) { choice in
                                     Text(choice.rawValue).tag(choice)
                                 }
@@ -544,22 +544,22 @@ struct HeatmapV2Demo: View {
                             .pickerStyle(.segmented)
 
                             HStack {
-                                Text("Threshold: \(threshold, specifier: "%.2f")")
+                                Text("Umbral: \(threshold, specifier: "%.2f")")
                                 Slider(value: $threshold, in: 0...0.5, step: 0.05)
                             }
 
-                            Toggle("Gradient Fill", isOn: $useGradientFill)
+                            Toggle("Relleno con degradado", isOn: $useGradientFill)
                         }
                     }
                     .padding(.horizontal)
 
-                    // Animated heatmap toggle
-                    Button(showAnimated ? "Show Upper Body" : "Show Lower Body") {
+                    // Alternar los datos animados
+                    Button(showAnimated ? "Mostrar tren superior" : "Mostrar tren inferior") {
                         showAnimated.toggle()
                     }
                     .buttonStyle(.borderedProminent)
 
-                    // Body view with heatmap config
+                    // Vista corporal con configuración de mapa de calor
                     HStack(alignment: .top, spacing: 8) {
                         bodyView
                             .frame(height: 420)
@@ -569,26 +569,26 @@ struct HeatmapV2Demo: View {
                             interpolation: interpolation.value,
                             orientation: .vertical,
                             barThickness: 14,
-                            labelMin: "Rest",
-                            labelMax: "Max"
+                            labelMin: "Reposo",
+                            labelMax: "Máx."
                         )
                         .frame(width: 50, height: 200)
                         .padding(.top, 100)
                     }
                     .padding(.horizontal)
 
-                    // Horizontal legend
+                    // Leyenda horizontal
                     HeatmapLegendView(
                         colorScale: .thermal,
                         interpolation: interpolation.value,
-                        labelMin: "Low",
-                        labelMax: "High"
+                        labelMin: "Baja",
+                        labelMax: "Alta"
                     )
                     .frame(width: 250)
                     .padding(.horizontal)
 
-                    // Stepped preset demo
-                    GroupBox("Stepped Preset") {
+                    // Demostración del modo por niveles
+                    GroupBox("Preajuste por niveles") {
                         BodyView(gender: .female, side: .front)
                             .heatmap(upperBodyData, colorScale: .workoutStepped)
                             .frame(height: 350)
@@ -597,7 +597,7 @@ struct HeatmapV2Demo: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("Heatmap V2")
+            .navigationTitle("Mapa de calor V2")
         }
     }
 
@@ -619,7 +619,7 @@ struct HeatmapV2Demo: View {
     }
 }
 
-// MARK: - Sub-Groups Demo
+// MARK: - Demostración de subgrupos
 
 struct SubGroupsDemo: View {
     @State private var selectedMuscle: Muscle?
@@ -628,10 +628,10 @@ struct SubGroupsDemo: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 24) {
-                    Text("Muscle Sub-Groups")
+                    Text("Subgrupos musculares")
                         .font(.headline)
 
-                    Text("Tap a muscle to see sub-group details.")
+                    Text("Toca una región para ver los detalles de sus subgrupos.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
@@ -667,12 +667,12 @@ struct SubGroupsDemo: View {
                             Text(muscle.displayName)
                                 .font(.title3.bold())
                             if muscle.isSubGroup, let parent = muscle.parentGroup {
-                                Text("Sub-group of \(parent.displayName)")
+                                Text("Subgrupo de \(parent.displayName)")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
                             if !muscle.subGroups.isEmpty {
-                                Text("Sub-groups: \(muscle.subGroups.map(\.displayName).joined(separator: ", "))")
+                                Text("Subgrupos: \(muscle.subGroups.map(\.displayName).joined(separator: ", "))")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
@@ -681,7 +681,7 @@ struct SubGroupsDemo: View {
                 }
                 .padding(.vertical)
             }
-            .navigationTitle("Sub-Groups")
+            .navigationTitle("Subgrupos")
         }
     }
 }
