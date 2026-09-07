@@ -4,16 +4,16 @@
 //  Package.swift
 //  MuscleMap
 //
-//  Created by Melih Colpan on 2026-02-09.
-//  Copyright © 2026 Melih Colpan. All rights reserved.
-//  Licensed under the MIT License.
+//  Creado por Melih Colpan el 2026-02-09.
+//  Copyright © 2026 Melih Colpan. Todos los derechos reservados.
+//  Licenciado bajo la licencia MIT.
 //
 
 import PackageDescription
 
 let package = Package(
     name: "MuscleMap",
-    defaultLocalization: "en",
+    defaultLocalization: "es",
     platforms: [
         .iOS(.v17),
         .macOS(.v14)
