@@ -2,14 +2,17 @@
 //  Muscle.swift
 //  MuscleMap
 //
-//  Created by Melih Colpan on 2026-02-09.
-//  Copyright © 2026 Melih Colpan. All rights reserved.
-//  Licensed under the MIT License.
+//  Creado por Melih Colpan el 2026-02-09.
+//  Copyright © 2026 Melih Colpan. Todos los derechos reservados.
+//  Licenciado bajo la licencia MIT.
 //
 
 import Foundation
 
-/// Represents all available muscle groups that can be highlighted on the body.
+/// Representa todos los grupos musculares disponibles que pueden resaltarse sobre el cuerpo.
+///
+/// Los identificadores de los `case` se conservan en inglés para mantener compatibilidad binaria
+/// y de código fuente. Usa ``displayName`` para mostrar al usuario la nomenclatura localizada.
 public enum Muscle: String, CaseIterable, Codable, Identifiable, Sendable {
     case abs
     case biceps
@@ -31,12 +34,12 @@ public enum Muscle: String, CaseIterable, Codable, Identifiable, Sendable {
     case triceps
     case upperBack = "upper-back"
 
-    // New muscle groups
+    // Nuevos grupos musculares
     case rotatorCuff = "rotator-cuff"
     case serratus
     case rhomboids
 
-    // Sub-groups
+    // Subgrupos
     case ankles
     case adductors
     case neck
@@ -54,12 +57,13 @@ public enum Muscle: String, CaseIterable, Codable, Identifiable, Sendable {
 
     public var id: String { rawValue }
 
-    /// Localized display name for the muscle.
+    /// Nombre localizado que debe mostrarse al usuario.
     public var displayName: String {
         NSLocalizedString("muscle.\(localizationKey)", bundle: .module, comment: "")
     }
 
-    /// Key used for localization lookup. Maps Swift case names to xcstrings keys.
+    /// Clave usada para la búsqueda de localización.
+    /// Convierte los nombres de los `case` de Swift en claves de `Localizable.strings`.
     private var localizationKey: String {
         switch self {
         case .abs: return "abs"
@@ -101,12 +105,13 @@ public enum Muscle: String, CaseIterable, Codable, Identifiable, Sendable {
         }
     }
 
-    /// Whether this is a cosmetic part (head/hair) rather than a muscle.
+    /// Indica si el elemento es una parte cosmética (cabeza/cabello) y no un músculo.
     public var isCosmeticPart: Bool {
         self == .head
     }
 
-    /// Sub-groups belonging to this muscle group. Empty if this muscle has no sub-groups.
+    /// Subgrupos que pertenecen a este grupo muscular.
+    /// Devuelve un arreglo vacío cuando el músculo no tiene subgrupos.
     public var subGroups: [Muscle] {
         switch self {
         case .chest: return [.upperChest, .lowerChest]
@@ -122,7 +127,7 @@ public enum Muscle: String, CaseIterable, Codable, Identifiable, Sendable {
         }
     }
 
-    /// The parent muscle group, if this muscle is a sub-group.
+    /// Grupo muscular padre cuando este elemento es un subgrupo.
     public var parentGroup: Muscle? {
         switch self {
         case .upperChest, .lowerChest: return .chest
@@ -138,13 +143,13 @@ public enum Muscle: String, CaseIterable, Codable, Identifiable, Sendable {
         }
     }
 
-    /// Whether this muscle is a sub-group of another muscle.
+    /// Indica si este músculo es subgrupo de otro.
     public var isSubGroup: Bool {
         parentGroup != nil
     }
 
-    /// Whether this sub-group is always rendered even when sub-groups are hidden.
-    /// When tapped in default mode, the parent muscle is returned instead.
+    /// Indica si el subgrupo debe renderizarse siempre aunque los subgrupos estén ocultos.
+    /// En el modo predeterminado, al tocarlo se devuelve el músculo padre.
     public var isAlwaysVisibleSubGroup: Bool {
         switch self {
         case .ankles, .adductors, .neck: return true
@@ -153,7 +158,7 @@ public enum Muscle: String, CaseIterable, Codable, Identifiable, Sendable {
     }
 }
 
-/// Internal-only slug that includes hair for rendering purposes.
+/// Identificador interno de renderizado que también incluye el cabello.
 enum BodySlug: String, CaseIterable {
     case abs
     case biceps
@@ -176,12 +181,12 @@ enum BodySlug: String, CaseIterable {
     case triceps
     case upperBack = "upper-back"
 
-    // New muscle groups
+    // Nuevos grupos musculares
     case rotatorCuff = "rotator-cuff"
     case serratus
     case rhomboids
 
-    // Sub-groups
+    // Subgrupos
     case ankles
     case adductors
     case neck
