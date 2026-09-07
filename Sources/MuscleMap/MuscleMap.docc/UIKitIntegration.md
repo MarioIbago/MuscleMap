@@ -1,14 +1,14 @@
-# UIKit Integration
+# Integración con UIKit
 
-Use MuscleMap in UIKit-based projects with ``MuscleMapView`` and ``HeatmapLegendUIView``.
+Usa MuscleMap en proyectos basados en UIKit mediante ``MuscleMapView`` y ``HeatmapLegendUIView``.
 
-## Overview
+## Descripción general
 
-While MuscleMap is built with SwiftUI, the ``MuscleMapView`` class provides a `UIView` wrapper that can be used directly in UIKit view controllers. All configuration is exposed through mutable properties and convenience methods.
+Aunque MuscleMap está construido con SwiftUI, la clase ``MuscleMapView`` ofrece un contenedor `UIView` que puede utilizarse directamente desde controladores de vista UIKit. Toda la configuración se expone mediante propiedades modificables y métodos de conveniencia.
 
-## Adding a Body View
+## Añadir una vista corporal
 
-Create a ``MuscleMapView`` and add it to your view hierarchy:
+Crea un ``MuscleMapView`` y añádelo a la jerarquía de vistas:
 
 ```swift
 import MuscleMap
@@ -32,24 +32,24 @@ class ViewController: UIViewController {
 }
 ```
 
-## Highlighting Muscles
+## Resaltar músculos
 
-Use the ``MuscleMapView/highlight(_:color:opacity:)`` method with UIKit colors:
+Usa ``MuscleMapView/highlight(_:color:opacity:)`` con colores de UIKit:
 
 ```swift
 muscleMap.highlight(.chest, color: .systemRed)
 muscleMap.highlight(.biceps, color: .systemOrange, opacity: 0.8)
 ```
 
-Or highlight multiple muscles at once:
+También puedes resaltar varios grupos a la vez:
 
 ```swift
 muscleMap.highlight([.chest, .deltoids, .triceps], color: .systemBlue)
 ```
 
-## Applying Heatmap Data
+## Aplicar datos de mapa de calor
 
-Use ``MuscleMapView/setIntensities(_:colorScale:)`` for integer-based workout data:
+Usa ``MuscleMapView/setIntensities(_:colorScale:)`` para valores enteros de entrenamiento:
 
 ```swift
 muscleMap.setIntensities([
@@ -59,7 +59,7 @@ muscleMap.setIntensities([
 ])
 ```
 
-Or use ``MuscleMapView/setHeatmap(_:colorScale:)`` for normalized intensity values:
+O usa ``MuscleMapView/setHeatmap(_:colorScale:)`` para intensidades normalizadas:
 
 ```swift
 muscleMap.setHeatmap([
@@ -68,23 +68,23 @@ muscleMap.setHeatmap([
 ])
 ```
 
-## Handling Callbacks
+## Gestionar eventos
 
-Assign closures to respond to user interactions:
+Asigna closures para responder a las interacciones del usuario:
 
 ```swift
 muscleMap.onMuscleSelected = { muscle, side in
-    print("Selected: \(muscle.displayName)")
+    print("Seleccionado: \(muscle.displayName)")
 }
 
 muscleMap.onMuscleLongPressed = { muscle, side in
-    print("Long pressed: \(muscle.displayName)")
+    print("Pulsación prolongada: \(muscle.displayName)")
 }
 ```
 
-## Configuring Properties
+## Configurar propiedades
 
-All ``BodyView`` features are available as mutable properties:
+Las funciones de ``BodyView`` están disponibles como propiedades modificables:
 
 ```swift
 muscleMap.gender = .female
@@ -95,9 +95,9 @@ muscleMap.isPulseEnabled = true
 muscleMap.isZoomEnabled = true
 ```
 
-## Adding a Heatmap Legend
+## Añadir una leyenda de mapa de calor
 
-Use ``HeatmapLegendUIView`` alongside the body view:
+Usa ``HeatmapLegendUIView`` junto a la vista corporal:
 
 ```swift
 let legend = HeatmapLegendUIView(colorScale: .workout)
