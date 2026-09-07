@@ -1,37 +1,37 @@
-# Getting Started with MuscleMap
+# Primeros pasos con MuscleMap
 
-Add MuscleMap to your project and display an interactive body view in minutes.
+Añade MuscleMap a tu proyecto y muestra un cuerpo humano interactivo en pocos minutos.
 
-## Overview
+## Descripción general
 
-MuscleMap is a pure SwiftUI package with no external dependencies. It supports iOS 17+ and macOS 14+.
+MuscleMap es un paquete nativo de SwiftUI sin dependencias externas. Es compatible con iOS 17+ y macOS 14+.
 
-## Adding MuscleMap to Your Project
+## Añadir MuscleMap a tu proyecto
 
-Add MuscleMap as a Swift Package dependency in Xcode:
+Añade MuscleMap como dependencia de Swift Package desde Xcode:
 
-1. Open your project in Xcode.
-2. Go to **File → Add Package Dependencies**.
-3. Enter the repository URL.
-4. Select the latest version and add it to your target.
+1. Abre tu proyecto en Xcode.
+2. Ve a **File → Add Package Dependencies**.
+3. Introduce la URL del repositorio: `https://github.com/MarioIbago/MuscleMap`.
+4. Selecciona la versión más reciente y añádela al target correspondiente.
 
-Or add it to your `Package.swift`:
+También puedes agregarlo a tu `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/AcademyOfGames/MuscleMap", from: "1.5.0")
+    .package(url: "https://github.com/MarioIbago/MuscleMap.git", from: "1.6.4")
 ]
 ```
 
-Then add `MuscleMap` as a dependency to your target:
+Después añade `MuscleMap` como dependencia de tu target:
 
 ```swift
-.target(name: "YourApp", dependencies: ["MuscleMap"])
+.target(name: "TuApp", dependencies: ["MuscleMap"])
 ```
 
-## Displaying a Body
+## Mostrar un cuerpo
 
-Import the module and use ``BodyView``:
+Importa el módulo y usa ``BodyView``:
 
 ```swift
 import MuscleMap
@@ -44,11 +44,11 @@ struct ContentView: View {
 }
 ```
 
-Choose between ``BodyGender/male`` and ``BodyGender/female`` models, and ``BodySide/front`` or ``BodySide/back`` views.
+Puedes elegir modelos ``BodyGender/male`` o ``BodyGender/female`` y vistas ``BodySide/front`` o ``BodySide/back``. Aunque los identificadores de la API permanecen en inglés para conservar compatibilidad, los nombres mostrados al usuario se localizan al español.
 
-## Highlighting Muscles
+## Resaltar músculos
 
-Use the `highlight` modifier to color individual muscles:
+Usa el modificador `highlight` para colorear regiones musculares:
 
 ```swift
 BodyView()
@@ -57,27 +57,29 @@ BodyView()
     .highlight(.abs, color: .yellow, opacity: 0.6)
 ```
 
-Highlight multiple muscles at once:
+Puedes resaltar varios músculos a la vez:
 
 ```swift
 BodyView()
     .highlight([.chest, .deltoids, .triceps], color: .blue)
 ```
 
-## Handling Taps
+En español, `displayName` usa nomenclatura anatómica revisada: `.chest` se muestra como **Pectoral mayor**, `.biceps` como **Bíceps braquial** y `.triceps` como **Tríceps braquial**.
 
-Respond to muscle taps with ``BodyView/onMuscleSelected(_:)``:
+## Gestionar toques
+
+Responde a los toques sobre una región con ``BodyView/onMuscleSelected(_:)``:
 
 ```swift
 BodyView()
     .onMuscleSelected { muscle, side in
-        print("\(muscle.displayName) tapped on \(side)")
+        print("Se tocó \(muscle.displayName) en \(side.displayName)")
     }
 ```
 
-## Intensity-Based Coloring
+## Color según intensidad
 
-Use the `intensities` modifier with a 0–4 scale (common in workout trackers):
+Usa el modificador `intensities` con una escala de 0 a 4, habitual en registros de entrenamiento:
 
 ```swift
 BodyView()
@@ -89,7 +91,7 @@ BodyView()
     ])
 ```
 
-## Next Steps
+## Siguientes pasos
 
-- Learn about heatmaps and color scales in <doc:HeatmapGuide>.
-- Use MuscleMap from UIKit with <doc:UIKitIntegration>.
+- Aprende a usar mapas de calor y escalas cromáticas en <doc:HeatmapGuide>.
+- Integra MuscleMap en UIKit con <doc:UIKitIntegration>.
