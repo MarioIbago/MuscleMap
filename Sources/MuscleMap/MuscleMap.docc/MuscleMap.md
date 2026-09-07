@@ -1,10 +1,12 @@
 # ``MuscleMap``
 
-A SwiftUI SDK for rendering interactive human body muscle maps with highlights, heatmaps, and gesture support.
+SDK de SwiftUI para renderizar mapas musculares interactivos del cuerpo humano con resaltados, mapas de calor y gestos.
 
-## Overview
+## Descripción general
 
-MuscleMap provides a declarative way to display a human body and visualize muscle data. Built entirely in SwiftUI with no external dependencies, it supports male and female body models, front and back views, tap/long-press/drag gestures, heatmap color scales, gradient fills, pulse animations, zoom, and more.
+MuscleMap ofrece una forma declarativa de mostrar el cuerpo humano y visualizar datos musculares. Está construido íntegramente con SwiftUI, sin dependencias externas, y admite modelos masculino y femenino, vistas anterior y posterior, gestos de toque, pulsación prolongada y arrastre, escalas de color para mapas de calor, degradados, animación de pulso, zoom y más.
+
+Los identificadores de la API (`.chest`, `.biceps`, `.quadriceps`, etc.) se mantienen en inglés para preservar compatibilidad. Los nombres visibles al usuario se localizan y, en español, usan nomenclatura anatómica revisada.
 
 ```swift
 import MuscleMap
@@ -13,30 +15,30 @@ BodyView(gender: .male, side: .front)
     .highlight(.chest, color: .red)
     .highlight(.biceps, color: .orange, opacity: 0.8)
     .onMuscleSelected { muscle, side in
-        print("Tapped \(muscle.displayName) (\(side))")
+        print("Seleccionado: \(muscle.displayName) (\(side.displayName))")
     }
 ```
 
-## Topics
+## Temas
 
-### Getting Started
+### Primeros pasos
 
 - <doc:GettingStarted>
 
-### Displaying Bodies
+### Visualización corporal
 
 - ``BodyView``
 - ``BodyGender``
 - ``BodySide``
 
-### Highlighting Muscles
+### Resaltado de músculos
 
 - ``Muscle``
 - ``MuscleSide``
 - ``MuscleHighlight``
 - ``MuscleFill``
 
-### Heatmaps
+### Mapas de calor
 
 - <doc:HeatmapGuide>
 - ``MuscleIntensity``
@@ -46,16 +48,16 @@ BodyView(gender: .male, side: .front)
 - ``GradientDirection``
 - ``HeatmapLegendView``
 
-### Styling
+### Estilos
 
 - ``BodyViewStyle``
 
-### Selection & History
+### Selección e historial
 
 - ``MuscleSelection``
 - ``SelectionHistory``
 
-### UIKit Integration
+### Integración con UIKit
 
 - <doc:UIKitIntegration>
 - ``MuscleMapView``
