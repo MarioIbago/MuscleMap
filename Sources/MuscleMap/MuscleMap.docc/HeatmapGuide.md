@@ -1,23 +1,23 @@
-# Heatmap Guide
+# Guía de mapas de calor
 
-Visualize muscle intensity data with color-coded heatmaps.
+Visualiza datos de intensidad muscular mediante mapas de calor codificados por color.
 
-## Overview
+## Descripción general
 
-MuscleMap supports heatmap rendering where each muscle is colored based on an intensity value. You can use built-in color scales, apply interpolation curves, enable gradient fills, and display a legend bar.
+MuscleMap puede colorear cada región muscular según un valor de intensidad. Puedes usar escalas de color incluidas, aplicar curvas de interpolación, activar rellenos con degradado y mostrar una leyenda.
 
-## Color Scales
+## Escalas de color
 
-A ``HeatmapColorScale`` maps intensity values (0.0–1.0) to colors. Built-in scales include:
+``HeatmapColorScale`` asigna valores de intensidad de 0.0 a 1.0 a colores. Las escalas incluidas son:
 
-| Scale | Colors |
-|-------|--------|
-| ``HeatmapColorScale/workout`` | Gray → Yellow → Orange → Red |
-| ``HeatmapColorScale/thermal`` | Blue → Green → Yellow → Red |
-| ``HeatmapColorScale/medical`` | Green → Yellow → Red |
-| ``HeatmapColorScale/monochrome`` | Light Gray → Dark |
+| Escala | Colores |
+|---|---|
+| ``HeatmapColorScale/workout`` | Gris → amarillo → naranja → rojo |
+| ``HeatmapColorScale/thermal`` | Azul → verde → amarillo → rojo |
+| ``HeatmapColorScale/medical`` | Verde → amarillo → rojo |
+| ``HeatmapColorScale/monochrome`` | Gris claro → oscuro |
 
-### Using a Color Scale
+### Usar una escala de color
 
 ```swift
 BodyView()
@@ -28,22 +28,22 @@ BodyView()
     ], colorScale: .thermal)
 ```
 
-### Integer Intensities
+### Intensidades enteras
 
-For simpler use cases (e.g. workout trackers), use the `intensities` modifier with a 0–4 scale:
+Para casos sencillos, por ejemplo un registro de entrenamiento, usa `intensities` con una escala de 0 a 4:
 
 ```swift
 BodyView()
     .intensities([
-        .chest: 4,    // maximum
-        .biceps: 2,   // medium
-        .abs: 1,      // low
+        .chest: 4,    // máxima
+        .biceps: 2,   // media
+        .abs: 1,      // baja
     ], colorScale: .workout)
 ```
 
-## Interpolation
+## Interpolación
 
-Control how colors transition across the scale using ``ColorInterpolation``:
+Controla cómo transicionan los colores mediante ``ColorInterpolation``:
 
 ```swift
 BodyView()
@@ -51,17 +51,17 @@ BodyView()
     .heatmapInterpolation(.easeInOut)
 ```
 
-Available interpolation modes:
-- ``ColorInterpolation/linear`` — even distribution (default)
-- ``ColorInterpolation/easeIn`` — slow start, fast end
-- ``ColorInterpolation/easeOut`` — fast start, slow end
-- ``ColorInterpolation/easeInOut`` — smooth S-curve
-- ``ColorInterpolation/step(count:)`` — discrete color bands
-- ``ColorInterpolation/custom(_:)`` — provide your own curve function
+Modos disponibles:
+- ``ColorInterpolation/linear`` — distribución uniforme, valor predeterminado.
+- ``ColorInterpolation/easeIn`` — inicio lento y final rápido.
+- ``ColorInterpolation/easeOut`` — inicio rápido y final lento.
+- ``ColorInterpolation/easeInOut`` — curva suave en S.
+- ``ColorInterpolation/step(count:)`` — bandas de color discretas.
+- ``ColorInterpolation/custom(_:)`` — función de curva personalizada.
 
-## Gradient Fill
+## Relleno con degradado
 
-Enable intra-muscle gradient fills where each muscle shows a gradient from low to high intensity:
+Activa un degradado dentro de cada región muscular, desde una intensidad menor hasta la intensidad real:
 
 ```swift
 BodyView()
@@ -69,21 +69,21 @@ BodyView()
     .heatmapGradient(direction: .topToBottom, lowFactor: 0.3)
 ```
 
-The `lowFactor` controls the intensity of the gradient's low end relative to the muscle's actual intensity.
+`lowFactor` controla la intensidad del extremo inferior del degradado con respecto a la intensidad real de la región.
 
-## Threshold
+## Umbral
 
-Hide muscles below a minimum intensity value:
+Oculta regiones cuya intensidad sea inferior a un valor mínimo:
 
 ```swift
 BodyView()
     .heatmap(data, colorScale: .workout)
-    .heatmapThreshold(0.2) // hide muscles with intensity < 0.2
+    .heatmapThreshold(0.2) // oculta intensidades < 0.2
 ```
 
-## Full Configuration
+## Configuración completa
 
-Use ``HeatmapConfiguration`` to combine all heatmap options:
+Usa ``HeatmapConfiguration`` para combinar todas las opciones:
 
 ```swift
 let config = HeatmapConfiguration(
@@ -99,9 +99,9 @@ BodyView()
     .heatmap(data, configuration: config)
 ```
 
-## Legend View
+## Leyenda
 
-Display a ``HeatmapLegendView`` alongside the body to show the color scale:
+Muestra ``HeatmapLegendView`` junto al cuerpo para explicar la escala cromática:
 
 ```swift
 VStack {
@@ -114,7 +114,7 @@ VStack {
 }
 ```
 
-Customize the legend appearance:
+Personaliza las etiquetas de la leyenda:
 
 ```swift
 HeatmapLegendView(
@@ -122,7 +122,7 @@ HeatmapLegendView(
     interpolation: .easeInOut,
     orientation: .vertical,
     barThickness: 20,
-    labelMin: "Rest",
-    labelMax: "Intense"
+    labelMin: "Reposo",
+    labelMax: "Máxima"
 )
 ```
