@@ -3,46 +3,54 @@ import XCTest
 
 final class LocalizationTests: XCTestCase {
 
-    func testAllMuscleDisplayNamesNotEmpty() {
+    func testTodosLosNombresMuscularesNoEstanVacios() {
         for muscle in Muscle.allCases {
-            XCTAssertFalse(muscle.displayName.isEmpty, "\(muscle) has empty displayName")
+            XCTAssertFalse(muscle.displayName.isEmpty, "\(muscle) tiene displayName vacío")
         }
     }
 
-    func testDisplayNameDoesNotReturnRawKey() {
+    func testDisplayNameNoDevuelveLaClaveCruda() {
         for muscle in Muscle.allCases {
             XCTAssertFalse(
                 muscle.displayName.hasPrefix("muscle."),
-                "\(muscle) displayName returned raw key: \(muscle.displayName)"
+                "\(muscle) devolvió la clave sin localizar: \(muscle.displayName)"
             )
         }
     }
 
-    func testEnglishDisplayNamesMatchExpected() {
-        XCTAssertEqual(Muscle.abs.displayName, "Abs")
-        XCTAssertEqual(Muscle.chest.displayName, "Chest")
-        XCTAssertEqual(Muscle.lowerBack.displayName, "Lower Back")
-        XCTAssertEqual(Muscle.upperBack.displayName, "Upper Back")
-        XCTAssertEqual(Muscle.quadriceps.displayName, "Quadriceps")
-        XCTAssertEqual(Muscle.rotatorCuff.displayName, "Rotator Cuff")
-        XCTAssertEqual(Muscle.hipFlexors.displayName, "Hip Flexors")
-        XCTAssertEqual(Muscle.upperChest.displayName, "Upper Chest")
-        XCTAssertEqual(Muscle.frontDeltoid.displayName, "Front Deltoid")
+    func testNombresAnatomicosPredeterminadosEnEspanol() {
+        XCTAssertEqual(Muscle.abs.displayName, "Recto del abdomen")
+        XCTAssertEqual(Muscle.chest.displayName, "Pectoral mayor")
+        XCTAssertEqual(Muscle.biceps.displayName, "Bíceps braquial")
+        XCTAssertEqual(Muscle.triceps.displayName, "Tríceps braquial")
+        XCTAssertEqual(Muscle.lowerBack.displayName, "Región lumbar")
+        XCTAssertEqual(Muscle.upperBack.displayName, "Región dorsal superior")
+        XCTAssertEqual(Muscle.quadriceps.displayName, "Cuádriceps femoral")
+        XCTAssertEqual(Muscle.tibialis.displayName, "Tibial anterior")
+        XCTAssertEqual(Muscle.rotatorCuff.displayName, "Manguito rotador")
+        XCTAssertEqual(Muscle.hipFlexors.displayName, "Flexores de la cadera")
+        XCTAssertEqual(Muscle.serratus.displayName, "Serrato anterior")
+        XCTAssertEqual(Muscle.rhomboids.displayName, "Romboides mayor y menor")
+        XCTAssertEqual(Muscle.upperChest.displayName, "Cabeza clavicular del pectoral mayor")
+        XCTAssertEqual(Muscle.lowerChest.displayName, "Cabeza esternocostal del pectoral mayor")
+        XCTAssertEqual(Muscle.innerQuad.displayName, "Vasto medial")
+        XCTAssertEqual(Muscle.outerQuad.displayName, "Vasto lateral")
+        XCTAssertEqual(Muscle.frontDeltoid.displayName, "Porción anterior del deltoides")
     }
 
-    func testMuscleSideDisplayName() {
-        XCTAssertEqual(MuscleSide.left.displayName, "Left")
-        XCTAssertEqual(MuscleSide.right.displayName, "Right")
-        XCTAssertEqual(MuscleSide.both.displayName, "Both")
+    func testNombreDeLadoMuscular() {
+        XCTAssertEqual(MuscleSide.left.displayName, "Izquierda")
+        XCTAssertEqual(MuscleSide.right.displayName, "Derecha")
+        XCTAssertEqual(MuscleSide.both.displayName, "Ambos lados")
     }
 
-    func testBodySideDisplayName() {
-        XCTAssertEqual(BodySide.front.displayName, "Front")
-        XCTAssertEqual(BodySide.back.displayName, "Back")
+    func testNombreDeVistaCorporal() {
+        XCTAssertEqual(BodySide.front.displayName, "Anterior")
+        XCTAssertEqual(BodySide.back.displayName, "Posterior")
     }
 
-    func testBodyGenderDisplayName() {
-        XCTAssertEqual(BodyGender.male.displayName, "Male")
-        XCTAssertEqual(BodyGender.female.displayName, "Female")
+    func testNombreDeSexoCorporal() {
+        XCTAssertEqual(BodyGender.male.displayName, "Masculino")
+        XCTAssertEqual(BodyGender.female.displayName, "Femenino")
     }
 }
