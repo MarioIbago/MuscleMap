@@ -1,67 +1,78 @@
 # MuscleMap
 
-A native SwiftUI SDK for rendering interactive human body muscle maps with highlighting, heatmaps, multi-select, zoom, gesture-rich interaction, and UIKit support.
+SDK nativo de SwiftUI para renderizar mapas musculares interactivos del cuerpo humano con resaltado, mapas de calor, selección múltiple, zoom, gestos e integración con UIKit.
 
-Supports **male & female** body models with **front & back** views. Works with both **SwiftUI** and **UIKit**.
+Admite modelos corporales **masculino y femenino**, con vistas **anterior y posterior**, y funciona tanto con **SwiftUI** como con **UIKit**.
+
+> **Español como idioma predeterminado.** Los identificadores de la API (`.chest`, `.biceps`, `.quadriceps`, etc.) permanecen en inglés para conservar compatibilidad con proyectos existentes. Los nombres que se muestran al usuario mediante `displayName` están localizados al español y utilizan nomenclatura anatómica revisada con *Moore, Anatomía con orientación clínica, 9.ª edición*.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/male_front_highlight.png" width="180" alt="Male Front">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/male_back_highlight.png" width="180" alt="Male Back">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/female_front_highlight.png" width="180" alt="Female Front">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/female_back_highlight.png" width="180" alt="Female Back">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/male_front_highlight.png" width="180" alt="Modelo masculino, vista anterior">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/male_back_highlight.png" width="180" alt="Modelo masculino, vista posterior">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/female_front_highlight.png" width="180" alt="Modelo femenino, vista anterior">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/female_back_highlight.png" width="180" alt="Modelo femenino, vista posterior">
 </p>
 
-## Features
+## Características
 
-- SVG-based body rendering via SwiftUI `Canvas`
-- **36 muscle groups** (22 base + 14 sub-groups) with left/right side detection
-- **Muscle sub-groups** with parent/child inheritance and priority hit testing
-- **Always-visible sub-groups** (ankles, adductors, neck) — rendered by default, tap returns parent
-- Heatmap visualization with customizable color scales
-- Tap-to-select with hit testing
-- **Multi-select** (select multiple muscles at once)
-- **Long press gesture** (with configurable duration)
-- **Drag-to-select** (paint muscles by dragging)
-- **Pinch-to-zoom & pan** (with double-tap to reset)
-- **Tooltips** (custom content positioned above selected muscles)
-- **Undo/redo** (selection history tracking)
-- 4 preset styles (default, minimal, neon, medical)
-- **Gradient fills** (linear & radial gradients)
-- **Transition animations** (fade in/out on highlight changes)
-- **Pulse/glow animation** (for selected muscles)
-- **Shadow/drop shadow** support
-- **UIKit wrappers** (`MuscleMapView`, `HeatmapLegendUIView`)
-- **Accessibility** (VoiceOver support with localized muscle names)
-- **Localization** (11 languages: EN, TR, DE, ES, FR, JA, ZH, KO, AR, PT-BR, RU)
-- **DocC documentation** catalog
-- Zero external dependencies
-- iOS 17+ / macOS 14+
+- Renderizado corporal basado en SVG mediante `Canvas` de SwiftUI.
+- **36 regiones musculares**: 22 grupos base y 14 subgrupos.
+- Detección de lado izquierdo, derecho o ambos.
+- Subgrupos musculares con relación padre/hijo y prioridad en la detección de toques.
+- Subgrupos siempre visibles para regiones como tobillos, aductores y cuello.
+- Mapas de calor con escalas de color configurables.
+- Selección por toque y detección precisa de regiones.
+- **Selección múltiple** de músculos.
+- **Pulsación prolongada** con duración configurable.
+- **Selección por arrastre**, como si se pintaran las regiones.
+- **Zoom con gesto de pellizco y desplazamiento**, con doble toque para restablecer.
+- **Tooltips** personalizados sobre músculos seleccionados.
+- **Deshacer/rehacer** mediante historial de selección.
+- Cuatro estilos incluidos: predeterminado, minimalista, neón y médico.
+- Rellenos con degradado lineal y radial.
+- Animaciones de transición al cambiar los resaltados.
+- Animación de pulso/brillo para la selección.
+- Sombras y sombras proyectadas.
+- Contenedores para UIKit: `MuscleMapView` y `HeatmapLegendUIView`.
+- Accesibilidad con VoiceOver y nombres musculares localizados.
+- Localización para 11 idiomas; **español como idioma predeterminado**.
+- Catálogo de documentación DocC en español.
+- Sin dependencias externas.
+- iOS 17+ y macOS 14+.
 
-## Installation
+## Instalación
 
 ### Swift Package Manager
 
-Add to your `Package.swift`:
+Añade el paquete a tu `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/melihcolpan/MuscleMap.git", from: "1.6.4")
+    .package(url: "https://github.com/MarioIbago/MuscleMap.git", from: "1.6.4")
 ]
 ```
 
-Or in Xcode: **File > Add Package Dependencies** and paste the repository URL.
+O en Xcode usa **File → Add Package Dependencies** y pega:
+
+```text
+https://github.com/MarioIbago/MuscleMap
+```
 
 ### CocoaPods
 
-Add to your `Podfile`:
+Añade al `Podfile`:
 
 ```ruby
 pod 'MuscleMap', '~> 1.6.4'
 ```
 
-Then run `pod install`.
+Después ejecuta:
 
-## Quick Start
+```bash
+pod install
+```
+
+## Inicio rápido
 
 ```swift
 import SwiftUI
@@ -77,9 +88,11 @@ struct ContentView: View {
 }
 ```
 
-## Usage
+Aunque el código usa `.chest` y `.biceps`, la interfaz en español muestra **Pectoral mayor** y **Bíceps braquial**.
 
-### Basic Highlighting
+## Uso
+
+### Resaltado básico
 
 ```swift
 BodyView(gender: .male, side: .front)
@@ -88,44 +101,55 @@ BodyView(gender: .male, side: .front)
     .highlight([.quadriceps, .calves], color: .orange)
 ```
 
-### Gradient Highlighting
+### Resaltado con degradado
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/gradient_linear.png" width="180" alt="Linear Gradient">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/gradient_radial.png" width="180" alt="Radial Gradient">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/gradient_neon.png" width="180" alt="Neon Gradient">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/gradient_linear.png" width="180" alt="Degradado lineal">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/gradient_radial.png" width="180" alt="Degradado radial">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/gradient_neon.png" width="180" alt="Degradado neón">
 </p>
 
 ```swift
-// Linear gradient (top to bottom)
+// Degradado lineal, de arriba hacia abajo
 BodyView(gender: .male, side: .front)
-    .highlight(.chest, linearGradient: [.red, .orange], startPoint: .top, endPoint: .bottom)
+    .highlight(
+        .chest,
+        linearGradient: [.red, .orange],
+        startPoint: .top,
+        endPoint: .bottom
+    )
 
-// Radial gradient (center outward)
-    .highlight(.biceps, radialGradient: [.white, .blue], center: .center, endRadius: 40)
+// Degradado radial, desde el centro
+    .highlight(
+        .biceps,
+        radialGradient: [.white, .blue],
+        center: .center,
+        endRadius: 40
+    )
 
-// Mix gradients and solid colors
+// Se pueden combinar degradados y colores sólidos
     .highlight(.quadriceps, color: .purple)
 ```
 
-### Tap Detection
+### Detectar toques
 
 ```swift
 BodyView(gender: .female, side: .front)
     .onMuscleSelected { muscle, side in
-        print("\(muscle.displayName) (\(side))")
+        print("\(muscle.displayName) — \(side.displayName)")
     }
 ```
 
-### Heatmap
+### Mapa de calor
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/heatmap_workout.png" width="200" alt="Workout Heatmap">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/heatmap_thermal.png" width="200" alt="Thermal Heatmap">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/heatmap_workout.png" width="200" alt="Mapa de calor de entrenamiento">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/heatmap_thermal.png" width="200" alt="Mapa de calor térmico">
 </p>
 
+Escala entera de 0 a 4:
+
 ```swift
-// Integer scale (0-4, like workout trackers)
 BodyView(gender: .male, side: .front)
     .intensities([
         .chest: 3,
@@ -133,71 +157,57 @@ BodyView(gender: .male, side: .front)
         .quadriceps: 4,
         .abs: 1
     ])
+```
 
-// Custom intensity data (0.0 - 1.0)
+Datos normalizados de 0.0 a 1.0:
+
+```swift
 let data = [
     MuscleIntensity(muscle: .chest, intensity: 0.8),
     MuscleIntensity(muscle: .biceps, intensity: 0.5, side: .left),
     MuscleIntensity(muscle: .abs, intensity: 0.3, color: .purple)
 ]
+
 BodyView(gender: .male, side: .front)
     .heatmap(data, colorScale: .thermal)
 ```
 
-### Color Scales
+### Escalas de color
 
-| Scale | Colors |
-|-------|--------|
-| `.workout` | gray -> yellow -> orange -> red |
-| `.thermal` | blue -> green -> yellow -> red |
-| `.medical` | green -> yellow -> red |
-| `.monochrome` | light gray -> dark |
-| `.workoutStepped` | workout with 5 discrete steps |
-| `.thermalSmooth` | thermal with ease-in-out curve |
+| Escala | Colores |
+|---|---|
+| `.workout` | gris → amarillo → naranja → rojo |
+| `.thermal` | azul → verde → amarillo → rojo |
+| `.medical` | verde → amarillo → rojo |
+| `.monochrome` | gris claro → oscuro |
+| `.workoutStepped` | entrenamiento en 5 niveles discretos |
+| `.thermalSmooth` | térmica con curva suave |
 
-Custom:
+Escala personalizada:
+
 ```swift
 let custom = HeatmapColorScale(colors: [.blue, .purple, .pink])
 ```
 
-### Color Interpolation
-
-Control how intensity values map to colors across the scale:
+### Interpolación del color
 
 ```swift
-// Ease-in-out for smoother transitions
 BodyView(gender: .male, side: .front)
     .heatmap(data, colorScale: .thermal)
     .heatmapInterpolation(.easeInOut)
-
-// Stepped (discrete levels)
-BodyView(gender: .male, side: .front)
-    .heatmap(data, colorScale: .workoutStepped)  // built-in 5-step preset
-
-// Custom curve
-.heatmapInterpolation(.custom { t in t * t * t })
 ```
 
-Available interpolations: `.linear`, `.easeIn`, `.easeOut`, `.easeInOut`, `.step(count:)`, `.custom()`
+Modos disponibles: `.linear`, `.easeIn`, `.easeOut`, `.easeInOut`, `.step(count:)` y `.custom()`.
 
-### Heatmap Threshold
-
-Hide muscles below a minimum intensity:
+### Umbral del mapa de calor
 
 ```swift
 BodyView(gender: .male, side: .front)
     .heatmap(data)
-    .heatmapThreshold(0.2)  // muscles with intensity < 0.2 are hidden
+    .heatmapThreshold(0.2) // oculta regiones con intensidad < 0.2
 ```
 
-### Gradient Heatmap Fill
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/heatmap_v2_gradient.png" width="220" alt="Gradient Heatmap">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/heatmap_v2_stepped.png" width="220" alt="Stepped Heatmap">
-</p>
-
-Apply intra-muscle gradients based on intensity (low-to-high color within each muscle):
+### Degradado dentro del mapa de calor
 
 ```swift
 BodyView(gender: .male, side: .front)
@@ -205,11 +215,9 @@ BodyView(gender: .male, side: .front)
     .heatmapGradient(direction: .topToBottom, lowFactor: 0.3)
 ```
 
-Directions: `.topToBottom`, `.bottomToTop`, `.leftToRight`, `.rightToLeft`
+Direcciones: `.topToBottom`, `.bottomToTop`, `.leftToRight`, `.rightToLeft`.
 
-### Heatmap Configuration
-
-Combine all heatmap settings in a single configuration:
+### Configuración completa del mapa de calor
 
 ```swift
 let config = HeatmapConfiguration(
@@ -225,30 +233,21 @@ BodyView(gender: .male, side: .front)
     .heatmap(data, configuration: config)
 ```
 
-### Heatmap Legend
-
-Display a color bar legend alongside the body view:
+### Leyenda
 
 ```swift
-// Horizontal legend
-HeatmapLegendView(colorScale: .workout)
-    .frame(width: 200)
-
-// Vertical legend with custom labels
 HeatmapLegendView(
     colorScale: .thermal,
     interpolation: .easeInOut,
     orientation: .vertical,
     barThickness: 20,
-    labelMin: "Rest",
-    labelMax: "Max"
+    labelMin: "Reposo",
+    labelMax: "Máxima"
 )
 .frame(width: 60, height: 200)
 ```
 
-### Animated Heatmap Transitions
-
-When using `.animated()`, color transitions between heatmap states are now smoothly interpolated:
+### Animación de transiciones
 
 ```swift
 BodyView(gender: .male, side: .front)
@@ -256,11 +255,11 @@ BodyView(gender: .male, side: .front)
     .animated(duration: 0.5)
 ```
 
-### Styles
+### Estilos
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/style_neon.png" width="200" alt="Neon Style">
-  <img src="https://raw.githubusercontent.com/melihcolpan/MuscleMap/main/Screenshots/style_medical.png" width="200" alt="Medical Style">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/style_neon.png" width="200" alt="Estilo neón">
+  <img src="https://raw.githubusercontent.com/MarioIbago/MuscleMap/main/Screenshots/style_medical.png" width="200" alt="Estilo médico">
 </p>
 
 ```swift
@@ -268,45 +267,16 @@ BodyView(gender: .male, side: .front)
     .bodyStyle(.neon)
 ```
 
-| Style | Description |
-|-------|-------------|
-| `.default` | Gray fill, green selection |
-| `.minimal` | Subtle fill, thin strokes |
-| `.neon` | Dark background, cyan selection, glow shadow |
-| `.medical` | Clinical blue-gray tones |
+| Estilo | Descripción |
+|---|---|
+| `.default` | relleno gris y selección verde |
+| `.minimal` | relleno sutil y trazos finos |
+| `.neon` | fondo oscuro, selección cian y brillo |
+| `.medical` | tonos clínicos azul-gris |
 
-Custom:
-```swift
-let style = BodyViewStyle(
-    defaultFillColor: .gray,
-    strokeColor: .white,
-    strokeWidth: 1,
-    selectionColor: .yellow,
-    selectionStrokeColor: .yellow,
-    selectionStrokeWidth: 3,
-    headColor: .gray,
-    hairColor: .black,
-    shadowColor: .blue.opacity(0.5),
-    shadowRadius: 6,
-    shadowOffset: CGSize(width: 0, height: 2)
-)
-```
+También puedes crear un `BodyViewStyle` personalizado.
 
-### Animations
-
-#### Transition Animation
-
-Smooth fade-in/fade-out when highlights change:
-
-```swift
-BodyView(gender: .male, side: .front)
-    .highlight(.chest, color: .red)
-    .animated(duration: 0.3)
-```
-
-#### Pulse Animation
-
-Pulsing glow effect on the selected muscle:
+### Animación de pulso
 
 ```swift
 @State private var selected: Muscle?
@@ -320,20 +290,7 @@ BodyView(gender: .male, side: .front)
     }
 ```
 
-### Selection State
-
-```swift
-// Single selection (backward compatible)
-@State private var selected: Muscle?
-
-BodyView(gender: .male, side: .front)
-    .selected(selected)
-    .onMuscleSelected { muscle, _ in
-        selected = muscle
-    }
-```
-
-### Multi-Select
+### Selección múltiple
 
 ```swift
 @State private var selectedMuscles: Set<Muscle> = []
@@ -349,27 +306,27 @@ BodyView(gender: .male, side: .front)
     }
 ```
 
-### Long Press
+### Pulsación prolongada
 
 ```swift
 BodyView(gender: .male, side: .front)
     .onMuscleLongPressed(duration: 0.5) { muscle, side in
-        print("Long pressed: \(muscle.displayName)")
+        print("Pulsación prolongada: \(muscle.displayName)")
     }
 ```
 
-### Drag-to-Select
+### Selección por arrastre
 
 ```swift
 BodyView(gender: .male, side: .front)
     .onMuscleDragged({ muscle, side in
         selectedMuscles.insert(muscle)
     }, onEnded: {
-        print("Drag ended")
+        print("Arrastre terminado")
     })
 ```
 
-### Pinch-to-Zoom
+### Zoom
 
 ```swift
 BodyView(gender: .male, side: .front)
@@ -389,7 +346,7 @@ BodyView(gender: .male, side: .front)
     }
 ```
 
-### Undo/Redo
+### Deshacer y rehacer
 
 ```swift
 @State private var history = SelectionHistory()
@@ -397,198 +354,127 @@ BodyView(gender: .male, side: .front)
 BodyView(gender: .male, side: .front)
     .undoable(history)
 
-Button("Undo") { if let state = history.undo() { selectedMuscles = state } }
-    .disabled(!history.canUndo)
-Button("Redo") { if let state = history.redo() { selectedMuscles = state } }
-    .disabled(!history.canRedo)
+Button("Deshacer") {
+    if let state = history.undo() { selectedMuscles = state }
+}
+
+Button("Rehacer") {
+    if let state = history.redo() { selectedMuscles = state }
+}
 ```
 
-### Muscle Sub-Groups
+## Subgrupos musculares
 
-Sub-groups provide finer control over muscle regions. They inherit the parent muscle's highlight when no specific highlight is set, and take priority in hit testing.
-
-**Always-visible sub-groups** (ankles, adductors, neck) are rendered by default but return their parent muscle on tap — so tapping the ankle area returns `.feet`, tapping the neck returns `.head`, etc.
+Los subgrupos permiten trabajar con regiones más específicas. Heredan el resaltado del grupo padre cuando no tienen uno propio y tienen prioridad en la detección de toques.
 
 ```swift
-// Highlight parent and sub-group with different intensities
 BodyView(gender: .male, side: .front)
-    .highlight(.chest, color: .red, opacity: 0.4)       // parent (dimmer)
-    .highlight(.upperChest, color: .red, opacity: 0.9)   // sub-group (brighter)
+    .highlight(.chest, color: .red, opacity: 0.4)
+    .highlight(.upperChest, color: .red, opacity: 0.9)
     .highlight(.quadriceps, color: .blue, opacity: 0.4)
     .highlight(.innerQuad, color: .blue, opacity: 0.9)
 ```
 
-Query sub-group relationships:
+Relaciones entre grupos:
 
 ```swift
-Muscle.chest.subGroups       // [.upperChest, .lowerChest]
-Muscle.upperChest.parentGroup // .chest
-Muscle.upperChest.isSubGroup  // true
-
-// Always-visible sub-groups
-Muscle.ankles.isAlwaysVisibleSubGroup  // true
-Muscle.ankles.parentGroup              // .feet
+Muscle.chest.subGroups
+Muscle.upperChest.parentGroup
+Muscle.upperChest.isSubGroup
+Muscle.ankles.isAlwaysVisibleSubGroup
 ```
 
-### Gender & Side
+## Sexo y orientación corporal
 
 ```swift
-BodyView(gender: .male, side: .front)   // Male front
-BodyView(gender: .male, side: .back)    // Male back
-BodyView(gender: .female, side: .front) // Female front
-BodyView(gender: .female, side: .back)  // Female back
+BodyView(gender: .male, side: .front)   // Masculino, anterior
+BodyView(gender: .male, side: .back)    // Masculino, posterior
+BodyView(gender: .female, side: .front) // Femenino, anterior
+BodyView(gender: .female, side: .back)  // Femenino, posterior
 ```
 
-## Available Muscles
+## Nomenclatura anatómica en español
 
-### Base Muscles (22)
+La siguiente tabla muestra la etiqueta visible en español. Las claves de la API no se renombraron para evitar cambios incompatibles.
 
-| Muscle | Key |
-|--------|-----|
-| Abs | `.abs` |
-| Biceps | `.biceps` |
-| Calves | `.calves` |
-| Chest | `.chest` |
-| Deltoids | `.deltoids` |
-| Feet | `.feet` |
-| Forearm | `.forearm` |
-| Gluteal | `.gluteal` |
-| Hamstring | `.hamstring` |
-| Hands | `.hands` |
-| Head | `.head` |
-| Knees | `.knees` |
-| Lower Back | `.lowerBack` |
-| Obliques | `.obliques` |
-| Quadriceps | `.quadriceps` |
-| Rhomboids | `.rhomboids` |
-| Rotator Cuff | `.rotatorCuff` |
-| Serratus | `.serratus` |
-| Tibialis | `.tibialis` |
-| Trapezius | `.trapezius` |
-| Triceps | `.triceps` |
-| Upper Back | `.upperBack` |
+| Clave Swift | Nombre visible en español |
+|---|---|
+| `.abs` | Recto del abdomen |
+| `.biceps` | Bíceps braquial |
+| `.calves` | Gastrocnemio y sóleo |
+| `.chest` | Pectoral mayor |
+| `.deltoids` | Deltoides |
+| `.feet` | Pies |
+| `.forearm` | Músculos del antebrazo |
+| `.gluteal` | Músculos glúteos |
+| `.hamstring` | Músculos isquiotibiales |
+| `.hands` | Manos |
+| `.head` | Cabeza |
+| `.knees` | Rodillas |
+| `.lowerBack` | Región lumbar |
+| `.obliques` | Oblicuos del abdomen |
+| `.quadriceps` | Cuádriceps femoral |
+| `.rhomboids` | Romboides mayor y menor |
+| `.rotatorCuff` | Manguito rotador |
+| `.serratus` | Serrato anterior |
+| `.tibialis` | Tibial anterior |
+| `.trapezius` | Trapecio |
+| `.triceps` | Tríceps braquial |
+| `.upperBack` | Región dorsal superior |
+| `.adductors` | Músculos aductores del muslo |
+| `.ankles` | Tobillos |
+| `.neck` | Cuello |
+| `.hipFlexors` | Flexores de la cadera |
+| `.upperChest` | Cabeza clavicular del pectoral mayor |
+| `.lowerChest` | Cabeza esternocostal del pectoral mayor |
+| `.innerQuad` | Vasto medial |
+| `.outerQuad` | Vasto lateral |
+| `.upperAbs` | Porción superior del recto del abdomen |
+| `.lowerAbs` | Porción inferior del recto del abdomen |
+| `.frontDeltoid` | Porción anterior del deltoides |
+| `.rearDeltoid` | Porción posterior del deltoides |
+| `.upperTrapezius` | Fibras superiores del trapecio |
+| `.lowerTrapezius` | Fibras inferiores del trapecio |
 
-### Sub-Groups (14)
+> Algunas claves representan **regiones de la ilustración** y no músculos anatómicos independientes. Por ejemplo, `upperAbs` y `lowerAbs` son subdivisiones gráficas del recto del abdomen; no se presentan como músculos distintos.
 
-| Sub-Group | Key | Parent | Always Visible |
-|-----------|-----|--------|:--------------:|
-| Upper Chest | `.upperChest` | `.chest` | |
-| Lower Chest | `.lowerChest` | `.chest` | |
-| Upper Abs | `.upperAbs` | `.abs` | |
-| Lower Abs | `.lowerAbs` | `.abs` | |
-| Inner Quad | `.innerQuad` | `.quadriceps` | |
-| Outer Quad | `.outerQuad` | `.quadriceps` | |
-| Hip Flexors | `.hipFlexors` | `.quadriceps` | |
-| Front Deltoid | `.frontDeltoid` | `.deltoids` | |
-| Rear Deltoid | `.rearDeltoid` | `.deltoids` | |
-| Upper Trapezius | `.upperTrapezius` | `.trapezius` | |
-| Lower Trapezius | `.lowerTrapezius` | `.trapezius` | |
-| Ankles | `.ankles` | `.feet` | Yes |
-| Adductors | `.adductors` | `.hamstring` | Yes |
-| Neck | `.neck` | `.head` | Yes |
+## Localización
 
-## UIKit Integration
+MuscleMap incluye recursos para español, inglés, turco, alemán, francés, japonés, chino simplificado, coreano, árabe, portugués de Brasil y ruso.
 
-### MuscleMapView
-
-Drop-in `UIView` wrapper for UIKit-based projects:
+El español es la localización predeterminada del paquete. Para mostrar un nombre nunca construyas la etiqueta a partir del `rawValue`; usa:
 
 ```swift
-import MuscleMap
+Text(muscle.displayName)
+```
 
-class ViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
+## UIKit
 
-        let muscleMap = MuscleMapView(gender: .male, side: .front)
-        muscleMap.highlight(.chest, color: .systemRed)
-        muscleMap.highlight(.biceps, color: .systemOrange, opacity: 0.8)
-        muscleMap.onMuscleSelected = { muscle, side in
-            print("\(muscle.displayName) tapped")
-        }
+```swift
+let muscleMap = MuscleMapView(gender: .male, side: .front)
+muscleMap.highlight(.chest, color: .systemRed)
 
-        view.addSubview(muscleMap)
-        muscleMap.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            muscleMap.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            muscleMap.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            muscleMap.widthAnchor.constraint(equalToConstant: 300),
-            muscleMap.heightAnchor.constraint(equalToConstant: 500)
-        ])
-    }
+muscleMap.onMuscleSelected = { muscle, side in
+    print("Seleccionado: \(muscle.displayName)")
 }
 ```
 
-### HeatmapLegendUIView
+También está disponible `HeatmapLegendUIView`.
 
-UIKit wrapper for the heatmap legend:
+## Compatibilidad
 
-```swift
-let legend = HeatmapLegendUIView(colorScale: .thermal)
-legend.orientation = .vertical
-legend.labelMin = "Rest"
-legend.labelMax = "Max"
-view.addSubview(legend)
-```
-
-## Accessibility
-
-MuscleMap includes full VoiceOver support. Each muscle region is exposed as an accessibility element with:
-
-- Localized muscle name as the accessibility label
-- Selection state ("Selected" / "Not selected")
-- Tap and long press hints
-- Top-to-bottom traversal order (anatomical navigation)
-
-Cosmetic parts (e.g., head) are excluded from the accessibility tree.
-
-```swift
-// Accessibility works automatically — no extra configuration needed
-BodyView(gender: .male, side: .front)
-    .highlight(.chest, color: .red)
-    .onMuscleSelected { muscle, side in
-        // VoiceOver users can double-tap to select
-    }
-```
-
-## Localization
-
-All muscle names, side labels, and accessibility strings are localized in **11 languages**:
-
-| Language | Code |
-|----------|------|
-| English | `en` |
-| Turkish | `tr` |
-| German | `de` |
-| Spanish | `es` |
-| French | `fr` |
-| Japanese | `ja` |
-| Chinese (Simplified) | `zh-Hans` |
-| Korean | `ko` |
-| Arabic | `ar` |
-| Portuguese (Brazil) | `pt-BR` |
-| Russian | `ru` |
-
-Localized names are available via `displayName`:
-
-```swift
-// Returns localized name based on user's device language
-Muscle.chest.displayName        // "Chest" (EN), "Göğüs" (TR), "Brust" (DE)
-MuscleSide.left.displayName     // "Left" (EN), "Sol" (TR), "Links" (DE)
-BodySide.front.displayName      // "Front" (EN), "Ön" (TR), "Vorderseite" (DE)
-BodyGender.male.displayName     // "Male" (EN), "Erkek" (TR), "Männlich" (DE)
-```
-
-## Example App
-
-A demo app is included in the `Example/` directory. Open `Example/MuscleMapDemoApp.xcodeproj` in Xcode to explore all features interactively.
-
-## Requirements
-
-- iOS 17.0+
-- macOS 14.0+
 - Swift 5.9+
+- iOS 17+
+- macOS 14+
+- SwiftUI
+- UIKit mediante contenedores incluidos
+- Swift Package Manager
+- CocoaPods
 
-## License
+## Fuente anatómica de la nomenclatura española
 
-MIT License. See [LICENSE](LICENSE) for details.
+La nomenclatura visible en español se revisó utilizando como referencia *Moore, Anatomía con orientación clínica, 9.ª edición*. Se usa como referencia terminológica; el SDK no reproduce contenido del libro.
+
+## Licencia
+
+MuscleMap se distribuye bajo la licencia MIT. Consulta `LICENSE` para el texto legal original.
